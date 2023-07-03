@@ -1,0 +1,36 @@
+.home-page {
+  background-color: #152850;
+  height: 100vh;
+  padding: 40px;
+  overflow-y: auto;
+  font-family: roboto;
+  color: #ffffff;
+}
+.header-container {
+  display: flex;
+  justify-content: space-around;
+}
+.logo-img {
+  width: 170px;
+  height: 70px;
+}
+.body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 30px;
+}
+.digital-card-img {
+  width: 600px;
+  height: 300px;
+}
+.logout-btn {
+  background: transparent;
+  border: 2px solid #ffffff;
+  height: 50px;
+  padding: 15px;
+  color: #ffffff;
+  margin-top: 12px;
+}

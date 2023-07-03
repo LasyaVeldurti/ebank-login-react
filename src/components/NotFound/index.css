@@ -1,0 +1,18 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  font-family: roboto;
+}
+.not-found-img {
+  width: 400px;
+  height: 300px;
+}
+.not-found-heading {
+  color: #183b56;
+}
+.text {
+  color: #5a7184;
+}
