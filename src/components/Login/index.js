@@ -1,4 +1,6 @@
 /// import {Link} from 'react-router-dom'
+import Cookies from 'js-cookie'
+
 import {Component} from 'react'
 
 import './index.css'
@@ -6,7 +8,7 @@ import './index.css'
 class Login extends Component {
   state = {userId: '', pin: '', errorMsg: '', showErrMsg: false}
 
-  onChangeUsername = event => {
+  onChangeUserId = event => {
     this.setState({userId: event.target.value})
   }
 
@@ -14,23 +16,27 @@ class Login extends Component {
     this.setState({pin: event.target.value})
   }
 
-  onSubmitSuccess = () => {
-    console.log('success')
+  onSubmitSuccess = jwtToken => {
+    const {history} = this.props
+    Cookies.set('jwt_token', jwtToken, {expires: 30})
+    history.replace('/')
   }
 
   onSubmitLoginForm = async event => {
     event.preventDefault()
     const {userId, pin} = this.state
-    const userDetails = {userId, pin}
-    const url = 'https://apis.ccbp.in/ebank/login/'
+
+    const loginDetails = {userId, pin}
+    const url = 'https://apis.ccbp.in/ebank/login'
     const options = {
       method: 'POST',
-      body: JSON.stringify(userDetails),
+      body: JSON.stringify(loginDetails),
     }
     const response = await fetch(url, options)
     const data = await response.json()
+    console.log(response)
     if (response.ok === true) {
-      this.onSubmitSuccess()
+      this.onSubmitSuccess(data.jwt_token)
     } else {
       this.setState({errorMsg: data.error_msg, showErrMsg: true})
     }
@@ -48,27 +54,27 @@ class Login extends Component {
           />
           <div className="user-form-container">
             <h1 className="welcome-heading">Welcome Back!</h1>
-            <form className="user-form" onSubmit={this.onSubmitLoginForm}>
+            <form className="login-form" onSubmit={this.onSubmitLoginForm}>
               <label className="label-text" htmlFor="username">
                 User ID
               </label>
               <br />
               <input
-                onChange={this.onChangeUsername}
+                onChange={this.onChangeUserId}
                 value={userId}
                 id="username"
                 type="text"
                 placeholder="Enter User ID"
               />
               <br />
-              <label className="label-text" htmlFor="pin">
+              <label className="label-text" htmlFor="pinInput">
                 PIN
               </label>
               <br />
               <input
                 onChange={this.onChangePin}
                 value={pin}
-                id="pin"
+                id="pinInput"
                 type="text"
                 placeholder="Enter PIN"
               />

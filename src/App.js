@@ -1,4 +1,4 @@
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
 
 import Login from './components/Login'
 
@@ -11,9 +11,11 @@ import './App.css'
 // Replace your code here
 const App = () => (
   <Switch>
-    <Route exact path="/" component={Home} />
     <Route exact path="/ebank/login" component={Login} />
-    <Route component={NotFound} />
+    <Route exact path="/" component={Home} />
+
+    <Route path="/not-found" component={NotFound} />
+    <Redirect to="not-found" />
   </Switch>
 )
 

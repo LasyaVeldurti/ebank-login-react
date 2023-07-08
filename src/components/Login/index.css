@@ -32,13 +32,13 @@
   text-decoration: none;
 }
 
-.user-form {
+.login-form {
   display: flex;
   flex-direction: column;
 }
 
 #username,
-#pin {
+#pinInput {
   padding: 12px;
   outline: none;
 }
